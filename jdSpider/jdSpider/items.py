@@ -13,4 +13,8 @@ class JdspiderItem(scrapy.Item):
     name = scrapy.Field()
     content= scrapy.Field()
     url = scrapy.Field()
-    pass
+
+class JdcommentItem(scrapy.Item):
+
+    content = scrapy.Field()
+    date = scrapy.Field()

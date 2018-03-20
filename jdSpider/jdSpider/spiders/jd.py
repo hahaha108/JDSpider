@@ -9,15 +9,23 @@ import lxml
 import re
 
 
+#提取一种类别商品信息
 class JdSpider(CrawlSpider):
     name = 'jd'
     allowed_domains = ['jd.com']
-    start_urls = ['https://list.jd.com/list.html?cat=670,671,1105']
+
+
 
     linkExtractor = LinkExtractor(allow=(r'jd\.com/\d+\.html',))
     rules = [
         Rule(linkExtractor,callback='JDparse',follow=True),
     ]
+
+    def __init__(self,serach_name = '笔记本'):
+        super(JdSpider, self).__init__()
+        self.start_urls = [
+            'https://search.jd.com/Search?keyword=%s&enc=utf-8&wq=bjb&pvid=39022e74e5c345b5955e121fdca849b7' % serach_name]
+
 
     def JDparse(self, response):
 
@@ -50,19 +58,24 @@ class JdSpider(CrawlSpider):
         # jieshao = html.xpath("//div[@class='item hide']/text()")[0]
         # print("商品简介：",jieshao)
 
+        # 京东的价格采用ajax动态加载，而且同一IP请求过于频繁可能触发验证码，这里很坑
+        # 如果触发验证码则获取不到价格信息，暂时没找到好的解决办法，添加异常处理
+        try:
+            number = re.findall(r"com/(\d+)\.html", url)[0]
+            # print(number)
 
-        number = re.findall(r"com/(\d+)\.html", url)[0]
-        # print(number)
+            ajaxUrl = r"https://p.3.cn/prices/mgets?callback=jQuery6296303&type=1&area=1_72_4137_0&pdtk=&pduid=15103642583881863116775&pdpin=&pin=null&pdbp=0&skuIds=J_" + number + r"&ext=11000000&source=item-pc"
 
-        ajaxUrl = r"https://p.3.cn/prices/mgets?callback=jQuery6296303&type=1&area=1_72_4137_0&pdtk=&pduid=15103642583881863116775&pdpin=&pin=null&pdbp=0&skuIds=J_" + number + r"&ext=11000000&source=item-pc"
+            ajaxResponse = requests.get(ajaxUrl)
+            # print(ajaxResponse.text)
+            prices = re.findall('"p":"(.*?)"', ajaxResponse.text)[0].strip()
+            # print("价格：", prices)
 
-        ajaxResponse = requests.get(ajaxUrl)
-        # print(ajaxResponse.text)
-        prices = re.findall('"p":"(.*?)"', ajaxResponse.text)[0].strip()
-        # print("价格：", prices)
+        except:
+            prices = "获取失败"
+
         namelist.append("价格")
         contentlist.append(prices)
-
 
         for info in infolist:
             titles = info.xpath("./dt/text()")

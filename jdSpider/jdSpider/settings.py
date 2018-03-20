@@ -65,7 +65,8 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'jdSpider.pipelines.JdspiderPipeline': 300,
+   # 'jdSpider.pipelines.JdspiderPipeline': 300,
+   'jdSpider.pipelines.JdcommentPipeline': 290,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
