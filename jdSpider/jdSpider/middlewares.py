@@ -4,8 +4,11 @@
 #
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
+import random
 
 from scrapy import signals
+from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
+from .useragents import USER_AGENTS
 
 
 class JdspiderSpiderMiddleware(object):
@@ -54,3 +57,10 @@ class JdspiderSpiderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class UserAgentmiddleware(UserAgentMiddleware):
+    def process_request(self, request, spider):
+        agent = random.choice(USER_AGENTS)
+        # log.msg('agent : %s' % agent,level=log.INFO)
+        request.headers['User-Agent'] = agent

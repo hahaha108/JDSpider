@@ -64,7 +64,7 @@ class JdSpider(CrawlSpider):
             number = re.findall(r"com/(\d+)\.html", url)[0]
             # print(number)
 
-            ajaxUrl = r"https://p.3.cn/prices/mgets?callback=jQuery6296303&type=1&area=1_72_4137_0&pdtk=&pduid=15103642583881863116775&pdpin=&pin=null&pdbp=0&skuIds=J_" + number + r"&ext=11000000&source=item-pc"
+            ajaxUrl = r"https://p.3.cn/prices/mgets?pdtk=&skuIds=J_" + number
 
             ajaxResponse = requests.get(ajaxUrl)
             # print(ajaxResponse.text)
