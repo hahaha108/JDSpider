@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for jdSpider project
+# Scrapy settings for jd project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'jdSpider'
+BOT_NAME = 'jd'
 
-SPIDER_MODULES = ['jdSpider.spiders']
-NEWSPIDER_MODULE = 'jdSpider.spiders'
+SPIDER_MODULES = ['jd.spiders']
+NEWSPIDER_MODULE = 'jd.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'jdSpider (+http://www.yourdomain.com)'
+#USER_AGENT = 'jd (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -47,14 +47,14 @@ COOKIES_ENABLED = False
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'jdSpider.middlewares.JdspiderSpiderMiddleware': 543,
+#    'jd.middlewares.JdspiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-   # 'jdSpider.middlewares.MyCustomDownloaderMiddleware': 543,
-   'jdSpider.middlewares.UserAgentmiddleware':400
+   # 'jd.middlewares.MyCustomDownloaderMiddleware': 543,
+   'jd.middlewares.UserAgentmiddleware':400
 }
 
 # Enable or disable extensions
@@ -66,8 +66,8 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'jdSpider.pipelines.JdspiderPipeline': 300,
-   # 'jdSpider.pipelines.JdcommentPipeline': 290,
+   # 'jd.pipelines.JdspiderPipeline': 300,
+   # 'jd.pipelines.JdcommentPipeline': 290,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -14,7 +14,11 @@ class JdSpider(CrawlSpider):
     name = 'jd'
     allowed_domains = ['jd.com']
 
-
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'jd.pipelines.JdspiderPipeline': 300,
+        }
+    }
 
     linkExtractor = LinkExtractor(allow=(r'jd\.com/\d+\.html',))
     rules = [

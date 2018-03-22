@@ -1,8 +1,12 @@
-from scrapy import cmdline
+from jdSpider.main_spider import JD_spider
 
-
-# 爬取商品信息
-cmdline.execute("scrapy crawl jd -a serach_name=电脑".split())
-
-#爬取评论信息
-# cmdline.execute("scrapy crawl JDcomment".split())
+if __name__ == '__main__':
+    # 获取对象
+    spider = JD_spider()
+    # 爬取商品
+    # spider.crawl('电脑')
+    # 获取商品url列表
+    urls = spider.get_urls(10)
+    # print(urls)
+    # 爬取评论
+    spider.crawl_comment(urls,2)

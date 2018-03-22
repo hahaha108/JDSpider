@@ -18,3 +18,5 @@ class JdcommentItem(scrapy.Item):
 
     content = scrapy.Field()
     date = scrapy.Field()
+    url = scrapy.Field()
+    name = scrapy.Field()
