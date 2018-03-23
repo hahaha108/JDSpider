@@ -17,7 +17,9 @@ class JdSpider(CrawlSpider):
     custom_settings = {
         'ITEM_PIPELINES': {
             'jd.pipelines.JdspiderPipeline': 300,
-        }
+        },
+        'DEPTH_PRIORITY' : 1,
+        'DEPTH_LIMIT': 3,
     }
 
     linkExtractor = LinkExtractor(allow=(r'jd\.com/\d+\.html',))
